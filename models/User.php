@@ -30,18 +30,17 @@ class User {
 
     //Register User
     public function register($data){
-        $this->db->query('INSERT INTO users (usersFName, usersLName, usersGender,usersDob,usersMobile,usersEmail, usersPwd) 
-        VALUES (:firstname, :lastname, :gender, :DOB, :mobile, :image, :email, :password)');
+        $this->db->query('INSERT INTO users (usersFName, usersLName, usersGender,usersDob,usersMobile,usersImage,usersEmail, usersPwd) 
+        VALUES (:firstname, :lastname, :gender, :DOB, :mobile,:image :email, :password)');
         //Bind values
         $this->db->bind(':firstname', $data['usersFName']);
         $this->db->bind(':lastname', $data['usersLName']);
         $this->db->bind(':gender', $data['usersGender']);
         $this->db->bind(':DOB', $data['usersDob']);
         $this->db->bind(':mobile', $data['usersMobile']);
-//        $this->db->bind(':image',$filename);
+        $this->db->bind(':image', $data['usersImage']);
         $this->db->bind(':email', $data['usersEmail']);
         $this->db->bind(':password', $data['usersPwd']);
-//        move_uploaded_file($image_tmp_name,$image_folder);
 
 
         //Execute
@@ -51,6 +50,12 @@ class User {
             return false;
         }
     }
+//    public function addPicture($data){
+//        $this->db->query('INSERT INTO users(usersImage)VALUES ()')
+//
+//
+//
+//    }
 
     //Login user
     public function login($mobileOrEmail, $password){
